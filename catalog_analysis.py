@@ -1,3 +1,4 @@
+# Задание №1
 import math  #для функций и вычислений
 
 movies = [
@@ -51,7 +52,34 @@ def duration_in_hours(minutes):  #1
     #3 выделчем минуты через остаток
     #4 выводит нужный формат
 
-if __name__ == "__main__":
+#Задание №2
+def rating_tier(rating):  #1
+    if rating >= 9:
+        return "шедевр"
+    elif rating >= 7:
+        return "хорошо"
+    else:
+        return "средне" if rating >= 5 else "слабо" #2
+    #1 Функция возвращает рейтинг по условию
+    #2 Тернарный оператор втунтри if/elif/else
+
+def decade_label(year):  #1
+    match year:
+        case _ if year > 2020:
+            return "новые"
+        case _ if year >= 2015:
+            return "недавние"
+        case _:
+            return "старые"
+
+if __name__ == "__main__":  #блок проверки(сдвигается каждый коммит)
     print("Средняя оценка:", average_rating(movies))
     print("Статистика возраста:", catalog_age_stats(movies))
-    # проверка функций
+
+    print("\nКатегории рейтинга:")
+    for rating in [9.5, 8.2, 6.0, 4.5]:
+        print(f"  {rating} → {rating_tier(rating)}")
+
+    print("\nМетки десятилетий:")
+    for year in [2024, 2021, 2020, 2015, 2014, 1990]:
+        print(f"  {year} → {decade_label(year)}")
