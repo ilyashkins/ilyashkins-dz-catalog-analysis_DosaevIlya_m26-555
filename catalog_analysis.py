@@ -72,14 +72,55 @@ def decade_label(year):  #1
         case _:
             return "старые"
 
-if __name__ == "__main__":  #блок проверки(сдвигается каждый коммит)
-    print("Средняя оценка:", average_rating(movies))
-    print("Статистика возраста:", catalog_age_stats(movies))
+#Задание №3
+print("\nФильмы НЕ-комедии: ")  #1
+for movie in movies:
+    if "comedy" in movie["genres"]:
+        continue
+    print(movie["title"])
+#1 просто ищет комедии и пропускает их, иначе - ввыводит 
 
-    print("\nКатегории рейтинга:")
-    for rating in [9.5, 8.2, 6.0, 4.5]:
-        print(f"  {rating} → {rating_tier(rating)}")
 
-    print("\nМетки десятилетий:")
-    for year in [2024, 2021, 2020, 2015, 2014, 1990]:
-        print(f"  {year} → {decade_label(year)}")
+print("\nПоиск первого шедевра")  #1
+i = 0  #2
+while i < len(movies):  #3
+    if movies[i]["rating"] > 9.0:  #4
+        print(f"найден: {movies[i]['title']} (рейтинг {movies[i]['rating']})")  #5
+        break  #6
+    i += 1  #7
+else:  #8
+    print("шедевров нет")
+#1 просто текст перед циклом
+#2 индекс/счётчик
+#3 условие выхода в конце списка
+#4 проверем рейтинг с 9.0 если True-шедевер,Else-дальше
+#5 если тру то выводится текст 
+#6 выходим из цикла
+#7 если фильм не подходит добавляем +1 в индекс i и смотрим рейтинг следующего фильма
+#8 если фильмы не  найдены выводим текст
+
+def count_long_movies(movies, threshold=120):  #1
+    count = 0
+    for movie in movies:
+        if movie["duration_min"] > threshold:
+            count += 1
+    return count
+#1 считает количество фильмов длиннее threshold минут
+
+ #блок проверки(сдвигается каждый коммит)
+ # задача №1
+print("\nСредняя оценка:", average_rating(movies))
+print("\nСтатистика возраста:", catalog_age_stats(movies))
+
+# задача №2
+print("\nКатегории рейтинга:")
+for rating in [9.5, 8.2, 6.0, 4.5]:
+    print(f"  {rating} → {rating_tier(rating)}")
+
+print("\nМетки десятилетий:")
+for year in [2024, 2021, 2020, 2015, 2014, 1990]:
+    print(f"  {year} → {decade_label(year)}")
+
+# задача №3
+print("\nФильмов длиннее 120 минут:", count_long_movies(movies))
+print("Фильмов длиннее 100 минут:", count_long_movies(movies, 100))
