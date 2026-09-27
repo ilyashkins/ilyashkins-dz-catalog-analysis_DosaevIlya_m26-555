@@ -107,13 +107,37 @@ def count_long_movies(movies, threshold=120):  #1
     return count
 #1 считает количество фильмов длиннее threshold минут
 
+# задание №4
+def normalize_title(title):  #1
+    words = title.split()
+    normalize_words = [word[0].upper() + word[1:].lower() for word in words]
+    return " ".join(normalize_words)  #2
+#1 функция разбивает название. 1знак делает заглавным, а остальные строчными.
+#2 склеивает через пробел 
+
+def make_slug(title):
+    return title.lower().replace(" ", "-")  #1
+#1 функция приводит все символф в нижний регистр  и заменяет пробел на "-"
+
+def format_report_line(movie):
+    title = normalize_title(movie["title"])  #1
+    duration = duration_in_hours(movie["duration_min"])  #2
+    genres = ", ".join(sorted(movie["genres"]))  #3
+    return f'"{title}" ({movie["year"]}) - {movie["rating"]}/10, {duration}, жанры: {genres}'
+
+
+
+
+
  #блок проверки(сдвигается каждый коммит)
  # задача №1
-print("\nСредняя оценка:", average_rating(movies))
+print('\n Задание №1')
+print("Средняя оценка:", average_rating(movies))
 print("\nСтатистика возраста:", catalog_age_stats(movies))
 
 # задача №2
-print("\nКатегории рейтинга:")
+print('\n Задание №2')
+print("Категории рейтинга:")
 for rating in [9.5, 8.2, 6.0, 4.5]:
     print(f"  {rating} → {rating_tier(rating)}")
 
@@ -122,5 +146,11 @@ for year in [2024, 2021, 2020, 2015, 2014, 1990]:
     print(f"  {year} → {decade_label(year)}")
 
 # задача №3
-print("\nФильмов длиннее 120 минут:", count_long_movies(movies))
+print('\n Задание №3')
+print("Фильмов длиннее 120 минут:", count_long_movies(movies))
 print("Фильмов длиннее 100 минут:", count_long_movies(movies, 100))
+
+# задача №4
+print(f'\n Задание №4, \n{normalize_title("silent hours")}')
+print(make_slug("Silent Hours"))
+print(format_report_line(movies[7]))
