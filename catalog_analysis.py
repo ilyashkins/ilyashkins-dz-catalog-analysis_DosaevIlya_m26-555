@@ -121,13 +121,24 @@ def make_slug(title):
 
 def format_report_line(movie):
     title = normalize_title(movie["title"])  #1
-    duration = duration_in_hours(movie["duration_min"])  #2
+    dur = duration_in_hours(movie["duration_min"])  #2
     genres = ", ".join(sorted(movie["genres"]))  #3
-    return f'"{title}" ({movie["year"]}) - {movie["rating"]}/10, {duration}, жанры: {genres}'
+    return f'"{title}" ({movie["year"]}) - {movie["rating"]}/10, {dur}, жанры: {genres}'
+#1 вытаскиваем назание из 
 
+# задание № 5
+def titles_sorted_by_rating(movie):  #1
+    sorted_movie = sorted(movie, key=lambda m: m['rating'], reverse=True)  #2
+    return [movie["title"] for movie in sorted_movie]  #3
+#1 вернет функцию отсортированных фильмов
+#2 сортирует фильмы по анонимной функции по ключу по рейтингу, от меньшего к большему
+#3 возвращает новый список отсортированных фильмов 
 
-
-
+def top_n_by_rating(movie, n=3):
+    sorted_movie = sorted(movie, key=lambda m: m['rating'], reverse=True)  #1
+    return [(movie["title"], movie["rating"]) for movie in sorted_movie[:n]]
+#1 та же самая сортировка, что и выше
+#2 возвращаем топ n с названием и рейтингом
 
  #блок проверки(сдвигается каждый коммит)
  # задача №1
@@ -154,3 +165,8 @@ print("Фильмов длиннее 100 минут:", count_long_movies(movies,
 print(f'\n Задание №4, \n{normalize_title("silent hours")}')
 print(make_slug("Silent Hours"))
 print(format_report_line(movies[7]))
+
+# задача №5
+print('\n Задание №5')
+print("Список фильмов по убыванию рейтинга: ", titles_sorted_by_rating(movies))
+print(top_n_by_rating(movies, 3))
