@@ -140,6 +140,45 @@ def top_n_by_rating(movie, n=3):
 #1 та же самая сортировка, что и выше
 #2 возвращаем топ n с названием и рейтингом
 
+#Задание №6
+def count_by_genre(movies):
+    counts = {}  #1
+    for movie in movies:  #2
+        for genre in movie["genres"]:  #3
+            counts[genre] = counts.get(genre, 0) + 1  #4
+    return counts  #5
+#1 пустой словарь
+#2 проходим по фильмамэ
+#3 Проходим по жанрам выбранного фильма
+#4 Увеличиваем счётчик
+#5 вернёт кол-во по каждому жанру
+
+def actor_filmography(movies):
+    filmography = {}  #1
+    for movie in movies:  #2
+        title = normalize_title(movie["title"])  #3
+        for actor in movie["actors"]:  #4
+            filmography.setdefault(actor, []).append(title)  #5
+    return filmography
+#1 cписок 
+#2 перебираем фильмы
+#3 приводим в Вид с Заглавной буквы из функции выше
+#4 перебираем актёров
+#5 если актёра нет создаём список, а потом добавляем название
+
+
+def top_rated_dict(movies):
+    threshold = average_rating(movies)  #1
+    return {  
+        normalize_title(movie["title"]): movie["rating"]  #2
+        for movie in movies  #3
+        if movie["rating"] > threshold  #4
+    }  
+#1 Вычеслим средний рейтинг из функции выше 
+#2 Название фильмов с Заглавной буквы
+#3 Перебираем фильмы
+#4 Условие при котором фильм вернётс в функцию, если выше среднего.
+
  #блок проверки(сдвигается каждый коммит)
  # задача №1
 print('\n Задание №1')
@@ -170,3 +209,12 @@ print(format_report_line(movies[7]))
 print('\n Задание №5')
 print("Список фильмов по убыванию рейтинга: ", titles_sorted_by_rating(movies))
 print(top_n_by_rating(movies, 3))
+
+print("\nЭтап 6. Словари:")
+print("Количество по жанрам:", count_by_genre(movies))
+print("\nФильмография:")
+for actor, films in actor_filmography(movies).items():
+    print(f"  {actor}: {films}")
+print("\nФильмы выше среднего:")
+for title, rating in top_rated_dict(movies).items():
+    print(f"  {title}: {rating}")
