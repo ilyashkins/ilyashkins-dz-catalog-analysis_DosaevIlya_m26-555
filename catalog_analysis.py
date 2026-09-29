@@ -127,15 +127,15 @@ def format_report_line(movie):
 #1 вытаскиваем назание из 
 
 # задание № 5
-def titles_sorted_by_rating(movie):  #1
-    sorted_movie = sorted(movie, key=lambda m: m['rating'], reverse=True)  #2
+def titles_sorted_by_rating(movies):  #1
+    sorted_movie = sorted(movies, key=lambda m: m['rating'], reverse=True)  #2
     return [movie["title"] for movie in sorted_movie]  #3
 #1 вернет функцию отсортированных фильмов
 #2 сортирует фильмы по анонимной функции по ключу по рейтингу, от меньшего к большему
 #3 возвращает новый список отсортированных фильмов 
 
-def top_n_by_rating(movie, n=3):
-    sorted_movie = sorted(movie, key=lambda m: m['rating'], reverse=True)  #1
+def top_n_by_rating(movies, n=3):
+    sorted_movie = sorted(movies, key=lambda m: m['rating'], reverse=True)  #1
     return [(movie["title"], movie["rating"]) for movie in sorted_movie[:n]]
 #1 та же самая сортировка, что и выше
 #2 возвращаем топ n с названием и рейтингом
@@ -179,6 +179,24 @@ def top_rated_dict(movies):
 #3 Перебираем фильмы
 #4 Условие при котором фильм вернётс в функцию, если выше среднего.
 
+#Задание №7
+def all_genres(movies):
+    result = set()
+    for movie in movies:
+        result |= movie["genres"]
+    return result
+
+def com_actors(movie1, movie2):
+    return set(movie1["actors"]) & set(movie2["actors"])
+
+
+def genres_only_in_one(movies_a, movies_b):
+    return all_genres(movies_a) - all_genres(movies_b)
+# проходится по функции выше и смотрит жанры фильмов movie_a и movie_b
+
+
+
+
  #блок проверки(сдвигается каждый коммит)
  # задача №1
 print('\n Задание №1')
@@ -210,6 +228,7 @@ print('\n Задание №5')
 print("Список фильмов по убыванию рейтинга: ", titles_sorted_by_rating(movies))
 print(top_n_by_rating(movies, 3))
 
+# задача №6
 print("\nЭтап 6. Словари:")
 print("Количество по жанрам:", count_by_genre(movies))
 print("\nФильмография:")
@@ -218,3 +237,12 @@ for actor, films in actor_filmography(movies).items():
 print("\nФильмы выше среднего:")
 for title, rating in top_rated_dict(movies).items():
     print(f"  {title}: {rating}")
+
+# задача №7
+print("\nЭтап 7. Множества:")
+print("Все жанры:", all_genres(movies))    
+print("Общие актёры movies[0] и movies[3]:", com_actors(movies[0], movies[3]))
+print(
+    "Жанры только в movies[5:6]:",
+    genres_only_in_one(movies[5:6], movies[:5]),
+)
