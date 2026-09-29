@@ -185,17 +185,22 @@ def all_genres(movies):
     for movie in movies:
         result |= movie["genres"]
     return result
+# перебирает жанры фильмов и добавляет их в множество 
 
 def com_actors(movie1, movie2):
     return set(movie1["actors"]) & set(movie2["actors"])
-
+# проходится по актёрам выбранных вильмов и ищет пересечения
 
 def genres_only_in_one(movies_a, movies_b):
     return all_genres(movies_a) - all_genres(movies_b)
 # проходится по функции выше и смотрит жанры фильмов movie_a и movie_b
 
-
-
+#Задание №8
+def iter_high_rated(movies, min_rating=8.0):
+    for movie in movies:
+        if movie["rating"] >= min_rating:
+            yield movie
+# функци по одному(изза yield) перебирает фильмы и сравнивает с min_rating
 
  #блок проверки(сдвигается каждый коммит)
  # задача №1
@@ -229,7 +234,7 @@ print("Список фильмов по убыванию рейтинга: ", ti
 print(top_n_by_rating(movies, 3))
 
 # задача №6
-print("\nЭтап 6. Словари:")
+print("\nЗадание №6. Словари:")
 print("Количество по жанрам:", count_by_genre(movies))
 print("\nФильмография:")
 for actor, films in actor_filmography(movies).items():
@@ -239,10 +244,18 @@ for title, rating in top_rated_dict(movies).items():
     print(f"  {title}: {rating}")
 
 # задача №7
-print("\nЭтап 7. Множества:")
+print("\nЗадание №7. Множества:")
 print("Все жанры:", all_genres(movies))    
 print("Общие актёры movies[0] и movies[3]:", com_actors(movies[0], movies[3]))
 print(
     "Жанры только в movies[5:6]:",
     genres_only_in_one(movies[5:6], movies[:5]),
 )
+
+# задача №8
+print("\nЗадание №8 \n Фильмы с рейтингом 8.0+:")
+for movie in iter_high_rated(movies):
+    print(format_report_line(movie))
+
+print("\n (Генеративное выражение: сумма длительности фильмов с 7,0+)")
+print(sum(m["duration_min"] for m in movies if m["rating"] > 7))
