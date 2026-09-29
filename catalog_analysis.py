@@ -72,14 +72,13 @@ def decade_label(year):  #1
         case _:
             return "старые"
 
-# #Задание №3
+# #Задание №3 (для проверки раскомментить)
 # print("\nФильмы НЕ-комедии: ")  #1
 # for movie in movies:
 #     if "comedy" in movie["genres"]:
 #         continue
 #     print(movie["title"])
 # #1 просто ищет комедии и пропускает их, иначе - ввыводит 
-
 
 # print("\nПоиск первого шедевра")  #1
 # i = 0  #2
@@ -222,63 +221,64 @@ def build_report(movies):
 
     print("\nВсе жанры каталога:", ", ".join(sorted(all_genres(movies))))
 
-#  #блок проверки(сдвигается каждый коммит)
-#  # задача №1
-# print('\n Задание №1')
-# print("Средняя оценка:", average_rating(movies))
-# print("\nСтатистика возраста:", catalog_age_stats(movies))
+if __name__ == "__main__":
+    #  #блок проверки(сдвигается каждый коммит)
+    #  # задача №1
+    # print('\n Задание №1')
+    # print("Средняя оценка:", average_rating(movies))
+    # print("\nСтатистика возраста:", catalog_age_stats(movies))
 
-# # задача №2
-# print('\n Задание №2')
-# print("Категории рейтинга:")
-# for rating in [9.5, 8.2, 6.0, 4.5]:
-#     print(f"  {rating} → {rating_tier(rating)}")
+    # # задача №2
+    # print('\n Задание №2')
+    # print("Категории рейтинга:")
+    # for rating in [9.5, 8.2, 6.0, 4.5]:
+    #     print(f"  {rating} → {rating_tier(rating)}")
 
-# print("\nМетки десятилетий:")
-# for year in [2024, 2021, 2020, 2015, 2014, 1990]:
-#     print(f"  {year} → {decade_label(year)}")
+    # print("\nМетки десятилетий:")
+    # for year in [2024, 2021, 2020, 2015, 2014, 1990]:
+    #     print(f"  {year} → {decade_label(year)}")
 
-# # задача №3
-# print('\n Задание №3')
-# print("Фильмов длиннее 120 минут:", count_long_movies(movies))
-# print("Фильмов длиннее 100 минут:", count_long_movies(movies, 100))
+    # # задача №3
+    # print('\n Задание №3')
+    # print("Фильмов длиннее 120 минут:", count_long_movies(movies))
+    # print("Фильмов длиннее 100 минут:", count_long_movies(movies, 100))
 
-# # задача №4
-# print(f'\n Задание №4, \n{normalize_title("silent hours")}')
-# print(make_slug("Silent Hours"))
-# print(format_report_line(movies[7]))
+    # # задача №4
+    # print(f'\n Задание №4, \n{normalize_title("silent hours")}')
+    # print(make_slug("Silent Hours"))
+    # print(format_report_line(movies[7]))
 
-# # задача №5
-# print('\n Задание №5')
-# print("Список фильмов по убыванию рейтинга: ", titles_sorted_by_rating(movies))
-# print(top_n_by_rating(movies, 3))
+    # # задача №5
+    # print('\n Задание №5')
+    # print("Список фильмов по убыванию рейтинга: ", titles_sorted_by_rating(movies))
+    # print(top_n_by_rating(movies, 3))
 
-# # задача №6
-# print("\nЗадание №6. Словари:")
-# print("Количество по жанрам:", count_by_genre(movies))
-# print("\nФильмография:")
-# for actor, films in actor_filmography(movies).items():
-#     print(f"  {actor}: {films}")
-# print("\nФильмы выше среднего:")
-# for title, rating in top_rated_dict(movies).items():
-#     print(f"  {title}: {rating}")
+    # # задача №6
+    # print("\nЗадание №6. Словари:")
+    # print("Количество по жанрам:", count_by_genre(movies))
+    # print("\nФильмография:")
+    # for actor, films in actor_filmography(movies).items():
+    #     print(f"  {actor}: {films}")
+    # print("\nФильмы выше среднего:")
+    # for title, rating in top_rated_dict(movies).items():
+    #     print(f"  {title}: {rating}")
 
-# # задача №7
-# print("\nЗадание №7. Множества:")
-# print("Все жанры:", all_genres(movies))    
-# print("Общие актёры movies[0] и movies[3]:", com_actors(movies[0], movies[3]))
-# print(
-#     "Жанры только в movies[5:6]:",
-#     genres_only_in_one(movies[5:6], movies[:5]),
-# )
+    # # задача №7
+    # print("\nЗадание №7. Множества:")
+    # print("Все жанры:", all_genres(movies))    
+    # print("Общие актёры movies[0] и movies[3]:", com_actors(movies[0], movies[3]))
+    # print(
+    #     "Жанры только в movies[5:6]:",
+    #     genres_only_in_one(movies[5:6], movies[:5]),
+    # )
 
-# # задача №8
-# print("\nЗадание №8 \n Фильмы с рейтингом 8.0+:")
-# for movie in iter_high_rated(movies):
-#     print(format_report_line(movie))
+    # # задача №8
+    # print("\nЗадание №8 \n Фильмы с рейтингом 8.0+:")
+    # for movie in iter_high_rated(movies):
+    #     print(format_report_line(movie))
 
-# print("\n (Генеративное выражение: сумма длительности фильмов с 7,0+)")
-# print(sum(m["duration_min"] for m in movies if m["rating"] > 7))
+    # print("\n (Генеративное выражение: сумма длительности фильмов с 7,0+)")
+    # print(sum(m["duration_min"] for m in movies if m["rating"] > 7))
 
-#Задача №9
-build_report(movies)
+    #Задача №9
+    build_report(movies)
